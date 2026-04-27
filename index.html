@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danielle D. Fogarty, PLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --gold:  #b8955a;
+      --dark:  #1a1612;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Raleway', sans-serif;
+      color: var(--cream);
+      background: #b8a898;
+    }
+
+    /* ── Full-viewport background image ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .bg picture,
+    .bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      display: block;
+      transform: scale(1.04);
+      animation: slowdrift 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowdrift {
+      from { transform: scale(1.04) translateX(0px); }
+      to   { transform: scale(1.04) translateX(-10px); }
+    }
+
+    /* ── Strong gradient: clear at top, solid dark from ~55% down ── */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(18,14,10,0.00)  0%,
+        rgba(18,14,10,0.00) 48%,
+        rgba(18,14,10,0.10) 54%,
+        rgba(18,14,10,0.22) 58%,
+        rgba(18,14,10,0.38) 62%,
+        rgba(18,14,10,0.54) 66%,
+        rgba(18,14,10,0.68) 70%,
+        rgba(18,14,10,0.80) 74%,
+        rgba(18,14,10,0.90) 79%,
+        rgba(18,14,10,0.96) 85%,
+        rgba(18,14,10,1.00) 100%
+      );
+      z-index: 1;
+    }
+
+    /* ── Layout: text anchored to bottom ── */
+    .card {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 24px 48px;
+      text-align: center;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Business name ── */
+    .business-name {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: clamp(1.8rem, 5.5vw, 3.2rem);
+      font-weight: normal;
+      font-variant: small-caps;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+      line-height: 1.15;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadein 1.8s 0.2s ease forwards;
+    }
+
+    /* ── Ornament ── */
+    .ornament-line {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 auto 20px;
+      width: fit-content;
+      opacity: 0;
+      animation: fadein 1.8s 0.8s ease forwards;
+    }
+    .ornament-line span {
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .ornament-line span:last-child {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+    .ornament-line .diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ── Contact ── */
+    .contact {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 26px;
+      opacity: 0;
+      animation: fadein 1.8s 1.4s ease forwards;
+    }
+
+    .contact-row {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: clamp(0.72rem, 1.7vw, 0.88rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+    }
+
+    .contact-row a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .contact-row a:hover { color: var(--gold); }
+
+    /* ── Footer ── */
+    .footer {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: clamp(0.58rem, 1.55vw, 0.92rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      text-align: center;
+      padding: 0 16px;
+      white-space: nowrap;
+      opacity: 0;
+      animation: fadein 1.8s 1.9s ease forwards;
+    }
+
+    .foot-diamond {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+
+    @media (max-width: 520px) {
+      body { overflow-y: auto; }
+      html, body { height: auto; }
+      .card { height: 100svh; }
+      .footer { font-size: 0.55rem; letter-spacing: 0.08em; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg">
+    <picture>
+      <source media="(max-width: 520px)"  srcset="images/Owl34.png">
+      <source media="(max-width: 1024px)" srcset="images/Owl11a.png">
+      <img src="images/Owl43a.png" alt="Barred Owl in Flight" />
+    </picture>
+  </div>
+
+  <div class="bg-overlay"></div>
+
+  <main class="card">
+
+    <h1 class="business-name">Danielle D. Fogarty, PLC</h1>
+
+    <div class="ornament-line">
+      <span></span>
+      <div class="diamond"></div>
+      <span></span>
+    </div>
+
+    <div class="contact">
+      <div class="contact-row">207 Main Street</div>
+      <div class="contact-row">P.O. Box 1007</div>
+      <div class="contact-row">Bennington, Vermont&nbsp; 05201</div>
+      <div class="contact-row" style="margin-top:4px;">
+        <a href="tel:+18024455776">(802) 445-5776</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      Danielle D. Fogarty &nbsp;<span class="foot-diamond"></span>&nbsp; Attorney-at-Law &nbsp;<span class="foot-diamond"></span>&nbsp; Vermont &nbsp;<span class="foot-diamond"></span>&nbsp; Massachusetts &nbsp;<span class="foot-diamond"></span>&nbsp; New York &nbsp;<span class="foot-diamond"></span>&nbsp; Since 1997
+    </div>
+
+  </main>
+
+</body>
+</html>
